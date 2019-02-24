@@ -12,10 +12,6 @@ public class ContentEnricher {
 
     private static final Logger LOG = LoggerFactory.getLogger(ContentEnricher.class);
 
-    public ContentEnricher() {
-        System.err.println("CREATED!!");
-    }
-
     @Handler
     public void enrich(Exchange exchange) {
         Message message = exchange.getIn();

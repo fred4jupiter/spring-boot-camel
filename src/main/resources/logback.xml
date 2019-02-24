@@ -14,6 +14,10 @@
 		<level value="DEBUG" />
 	</logger>
 
+	<logger name="CsvProcessingRoute">
+		<level value="DEBUG" />
+	</logger>
+
 	<root>
 		<level value="WARN" />
 		<appender-ref ref="CONSOLE" />
