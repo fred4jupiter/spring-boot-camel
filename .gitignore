@@ -26,3 +26,5 @@
 
 inbox/
 outbox/
+csv-inbox/
+json-outbox/

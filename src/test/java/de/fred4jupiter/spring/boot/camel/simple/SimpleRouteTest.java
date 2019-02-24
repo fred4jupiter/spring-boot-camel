@@ -1,4 +1,4 @@
-package de.fred4jupiter.spring.boot.camel;
+package de.fred4jupiter.spring.boot.camel.simple;
 
 import org.apache.camel.EndpointInject;
 import org.apache.camel.component.mock.MockEndpoint;
@@ -37,5 +37,4 @@ public class SimpleRouteTest {
         String content = FileUtils.readFileToString(outboxFile, "UTF-8");
         assertThat(content, equalTo(bodyResult));
     }
-
 }

@@ -1,4 +1,4 @@
-package de.fred4jupiter.spring.boot.camel;
+package de.fred4jupiter.spring.boot.camel.simple;
 
 import org.apache.camel.spring.SpringRouteBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
