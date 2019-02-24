@@ -19,8 +19,8 @@ public class CsvProcessingRoute extends SpringRouteBuilder {
         csv.setDelimiter(';');
         csv.setSkipHeaderRecord(true);
 
-        from("file:csv-inbox").id("CsvProcessingRoute").unmarshal(csv).bean(instanceCreator).marshal().json(JsonLibrary.Gson, true)
+        from("file:inbox/csv").id("CsvProcessingRoute").unmarshal(csv).bean(instanceCreator).marshal().json(JsonLibrary.Gson, true)
                 .log(LoggingLevel.DEBUG, "processed CSV file: ${header.CamelFileName}, ID: ${id}")
-                .to("file:json-outbox?fileName=sample-data.json", "mock:json-out");
+                .to("file:outbox/json?fileName=sample-data.json", "mock:json-out");
     }
 }

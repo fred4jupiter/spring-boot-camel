@@ -33,12 +33,12 @@ public class CsvToJsonProcessingTest {
 
     @Test
     public void createFileInInboxAndCheckResult() throws IOException, InterruptedException {
-        FileUtils.copyFile(new File("src/main/resources/csv/sample-data.csv"), new File("csv-inbox/sample-data.csv"));
+        FileUtils.copyFile(new File("src/main/resources/csv/sample-data.csv"), new File("inbox/csv/sample-data.csv"));
 
         mockEndpoint.setExpectedCount(1);
         mockEndpoint.assertIsSatisfied();
 
-        File outboxFile = new File("json-outbox/sample-data.json");
+        File outboxFile = new File("outbox/json/sample-data.json");
         assertThat(outboxFile.exists(), equalTo(true));
 
         String content = FileUtils.readFileToString(outboxFile, "UTF-8");

@@ -23,7 +23,7 @@ public class SimpleRouteTest {
 
     @Test
     public void createFileInInboxAndCheckResult() throws IOException, InterruptedException {
-        FileUtils.writeStringToFile(new File("inbox/Test.txt"), "Hello", "UTF-8");
+        FileUtils.writeStringToFile(new File("inbox/txt/test.txt"), "Hello", "UTF-8");
 
         final String bodyResult = "Hello World!";
 
@@ -31,7 +31,7 @@ public class SimpleRouteTest {
         mockEndpoint.expectedBodiesReceived(bodyResult);
         mockEndpoint.assertIsSatisfied();
 
-        File outboxFile = new File("outbox/Test.txt");
+        File outboxFile = new File("outbox/txt/test.txt");
         assertThat(outboxFile.exists(), equalTo(true));
 
         String content = FileUtils.readFileToString(outboxFile, "UTF-8");
