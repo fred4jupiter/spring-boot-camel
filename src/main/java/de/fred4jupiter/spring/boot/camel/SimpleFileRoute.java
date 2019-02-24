@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MyCamelRoutes extends SpringRouteBuilder {
+public class SimpleFileRoute extends SpringRouteBuilder {
 
     @Autowired
     private ContentEnricher contentEnricher;
