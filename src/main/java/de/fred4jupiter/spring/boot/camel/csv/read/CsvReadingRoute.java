@@ -17,11 +17,11 @@ public class CsvReadingRoute extends SpringRouteBuilder {
 
         BindyCsvDataFormat csvDataFormat = new BindyCsvDataFormat(Person.class);
 
-        from("file:inbox/csv?moveFailed=error/${file:name.noext}-${date:now:yyyyMMddHHmmssSSS}.${file:ext}")
+        from("file:{{inbox.csv.folder}}?moveFailed=error/${file:name.noext}-${date:now:yyyyMMddHHmmssSSS}.${file:ext}")
                 .id("CsvReadingRoute")
                 .unmarshal(csvDataFormat)
                 .marshal().json(JsonLibrary.Gson, true)
                 .log(LoggingLevel.DEBUG, "processed CSV file: ${header.CamelFileName}, ID: ${id}")
-                .to("file:outbox/json?fileName=sample-data.json", "mock:json-out");
+                .to("file:{{outbox.json.folder}}?fileName=sample-data.json", "mock:json-out");
     }
 }
