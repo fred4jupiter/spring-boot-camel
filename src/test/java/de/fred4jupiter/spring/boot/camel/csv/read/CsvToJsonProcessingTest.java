@@ -1,7 +1,8 @@
-package de.fred4jupiter.spring.boot.camel.csv;
+package de.fred4jupiter.spring.boot.camel.csv.read;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import de.fred4jupiter.spring.boot.camel.csv.Person;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.commons.io.FileUtils;

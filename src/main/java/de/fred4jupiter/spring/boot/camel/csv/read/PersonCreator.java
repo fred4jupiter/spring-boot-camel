@@ -1,5 +1,6 @@
-package de.fred4jupiter.spring.boot.camel.csv;
+package de.fred4jupiter.spring.boot.camel.csv.read;
 
+import de.fred4jupiter.spring.boot.camel.csv.Person;
 import org.apache.camel.Body;
 import org.apache.camel.Exchange;
 import org.apache.camel.Handler;

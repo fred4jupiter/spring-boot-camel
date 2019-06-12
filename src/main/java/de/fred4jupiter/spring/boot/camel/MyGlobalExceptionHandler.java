@@ -11,6 +11,8 @@ public class MyGlobalExceptionHandler implements Processor {
 
     private static final Logger LOG = LoggerFactory.getLogger(MyGlobalExceptionHandler.class);
 
+    public static final String NAME = "myGlobalExceptionHandler";
+
     @Override
     public void process(Exchange exchange) {
         Exception e = exchange.getProperty(Exchange.EXCEPTION_CAUGHT, Exception.class);
