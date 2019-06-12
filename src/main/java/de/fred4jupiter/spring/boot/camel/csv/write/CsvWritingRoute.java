@@ -17,7 +17,7 @@ public class CsvWritingRoute extends SpringRouteBuilder {
 
         from("direct:start")
                 .marshal(csvDataFormat)
-                .to("file:outbox/csv-write?fileName=sample-data.csv", "mock:csv-out")
+                .to("file:{{outbox.csv.folder}}?fileName=sample-data.csv", "mock:csv-out")
                 .unmarshal(csvDataFormat)
                 .to("mock:end");
     }

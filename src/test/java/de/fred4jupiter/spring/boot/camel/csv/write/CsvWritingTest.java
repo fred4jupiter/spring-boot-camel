@@ -1,7 +1,6 @@
 package de.fred4jupiter.spring.boot.camel.csv.write;
 
 import de.fred4jupiter.spring.boot.camel.csv.Person;
-import org.apache.camel.ConsumerTemplate;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
@@ -9,6 +8,7 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -23,6 +23,9 @@ import static org.junit.Assert.assertThat;
 @SpringBootTest
 public class CsvWritingTest {
 
+    @Value("${outbox.csv.folder}")
+    private String outboxCsvFolder;
+
     @Autowired
     private ProducerTemplate producerTemplate;
 
@@ -35,7 +38,7 @@ public class CsvWritingTest {
 
         producerTemplate.sendBody("direct:start", persons);
 
-        File outputFile = new File("outbox/csv-write/sample-data.csv");
+        File outputFile = new File(outboxCsvFolder + File.separator + "/sample-data.csv");
         assertThat(outputFile.exists(), equalTo(true));
 
         mockEndpoint.setExpectedCount(1);
