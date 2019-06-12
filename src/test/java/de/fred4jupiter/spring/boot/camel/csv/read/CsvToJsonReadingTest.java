@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -29,12 +30,15 @@ public class CsvToJsonReadingTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(CsvToJsonReadingTest.class);
 
+    @Value("${inbox.csv.folder}")
+    private String inboxCsvFolder;
+
     @EndpointInject(uri = "mock:json-out")
     private MockEndpoint mockEndpoint;
 
     @Test
     public void createFileInInboxAndCheckResult() throws IOException, InterruptedException {
-        FileUtils.copyFile(new File("src/main/resources/csv/sample-data.csv"), new File("inbox/csv/sample-data.csv"));
+        FileUtils.copyFile(new File("src/main/resources/csv/sample-data.csv"), new File(inboxCsvFolder + File.separator + "sample-data.csv"));
 
         mockEndpoint.setExpectedCount(1);
         mockEndpoint.assertIsSatisfied();
