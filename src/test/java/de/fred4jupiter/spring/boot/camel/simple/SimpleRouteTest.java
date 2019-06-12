@@ -5,6 +5,7 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -18,12 +19,18 @@ import static org.junit.Assert.assertThat;
 @SpringBootTest
 public class SimpleRouteTest {
 
+    @Value("${inbox.text.folder}")
+    private String inboxTextFolder;
+
+    @Value("${outbox.text.folder}")
+    private String outboxTextFolder;
+
     @EndpointInject(uri = "mock:out")
     private MockEndpoint mockEndpoint;
 
     @Test
     public void createFileInInboxAndCheckResult() throws IOException, InterruptedException {
-        FileUtils.writeStringToFile(new File("inbox/txt/test.txt"), "Hello", "UTF-8");
+        FileUtils.writeStringToFile(new File(inboxTextFolder + File.separator + "test.txt"), "Hello", "UTF-8");
 
         final String bodyResult = "Hello World!";
 
@@ -31,7 +38,7 @@ public class SimpleRouteTest {
         mockEndpoint.expectedBodiesReceived(bodyResult);
         mockEndpoint.assertIsSatisfied();
 
-        File outboxFile = new File("outbox/txt/test.txt");
+        File outboxFile = new File(outboxTextFolder + File.separator + "test.txt");
         assertThat(outboxFile.exists(), equalTo(true));
 
         String content = FileUtils.readFileToString(outboxFile, "UTF-8");
