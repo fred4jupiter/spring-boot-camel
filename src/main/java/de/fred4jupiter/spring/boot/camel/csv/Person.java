@@ -10,10 +10,10 @@ public class Person {
     @DataField(pos = 1)
     private String name;
 
-    @DataField(pos = 2)
+    @DataField(pos = 2, trim = true)
     private Integer iq;
 
-    @DataField(pos = 3)
+    @DataField(pos = 3, trim = true)
     private String description;
 
     public Person() {

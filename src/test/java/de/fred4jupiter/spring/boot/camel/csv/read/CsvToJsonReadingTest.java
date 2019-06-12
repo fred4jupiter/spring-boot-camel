@@ -25,9 +25,9 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CsvToJsonProcessingTest {
+public class CsvToJsonReadingTest {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CsvToJsonProcessingTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CsvToJsonReadingTest.class);
 
     @EndpointInject(uri = "mock:json-out")
     private MockEndpoint mockEndpoint;

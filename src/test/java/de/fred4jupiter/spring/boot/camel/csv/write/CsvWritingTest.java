@@ -30,7 +30,7 @@ public class CsvWritingTest {
     private MockEndpoint mockEndpoint;
 
     @Test
-    public void createDemoDataAndWriteCsvFile() {
+    public void createDemoDataAndWriteCsvFile() throws InterruptedException {
         final List<Person> persons = createListOfPersons();
 
         producerTemplate.sendBody("direct:start", persons);
@@ -38,6 +38,8 @@ public class CsvWritingTest {
         File outputFile = new File("outbox/csv-write/sample-data.csv");
         assertThat(outputFile.exists(), equalTo(true));
 
+        mockEndpoint.setExpectedCount(1);
+        mockEndpoint.assertIsSatisfied();
         Exchange exchange = mockEndpoint.getReceivedExchanges().get(0);
 
         List<Person> personsBack = exchange.getIn().getBody(List.class);
