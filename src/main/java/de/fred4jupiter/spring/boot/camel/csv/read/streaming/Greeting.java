@@ -1,4 +1,4 @@
-package de.fred4jupiter.spring.boot.camel.csv.read;
+package de.fred4jupiter.spring.boot.camel.csv.read.streaming;
 
 import org.apache.camel.dataformat.bindy.annotation.CsvRecord;
 import org.apache.camel.dataformat.bindy.annotation.DataField;

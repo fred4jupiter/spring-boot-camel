@@ -1,4 +1,4 @@
-package de.fred4jupiter.spring.boot.camel.csv.read;
+package de.fred4jupiter.spring.boot.camel.csv.read.streaming;
 
 import de.fred4jupiter.spring.boot.camel.MyGlobalExceptionHandler;
 import de.fred4jupiter.spring.boot.camel.csv.Person;
