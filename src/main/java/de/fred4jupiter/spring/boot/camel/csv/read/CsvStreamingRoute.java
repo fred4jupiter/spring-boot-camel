@@ -13,12 +13,20 @@ public class CsvStreamingRoute extends SpringRouteBuilder {
     public void configure() {
         onException(Exception.class).process(MyGlobalExceptionHandler.NAME);
 
-        BindyCsvDataFormat csvDataFormat = new BindyCsvDataFormat(Person.class);
+        BindyCsvDataFormat personCsvDataFormat = new BindyCsvDataFormat(Person.class);
+
+        BindyCsvDataFormat greetingCsvDataFormat = new BindyCsvDataFormat(Greeting.class);
 
         from("file:{{inbox.csv.folder}}/stream")
-                .split().tokenize("\r\n", 100)
-                .unmarshal(csvDataFormat)
-                .bean("streamProcessor")
-                .to("mock:streaming-out");
+                .setHeader("id", constant("streamfile"))
+                .split()
+                .tokenize("\r\n", 100)
+                .streaming()
+                .unmarshal(personCsvDataFormat)
+                .bean(StreamProcessor.NAME)
+                .aggregate(header("id"), new GreetingAggregationStrategy())
+                .completionTimeout(5000)
+                .marshal(greetingCsvDataFormat)
+                .to("file:{{outbox.csv.folder}}/stream", "mock:streaming-out");
     }
 }
