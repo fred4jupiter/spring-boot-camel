@@ -48,11 +48,15 @@ public class CsvToJsonReadingTest {
 
         String content = FileUtils.readFileToString(outboxFile, "UTF-8");
 
-        Type listType = new TypeToken<ArrayList<Person>>() {
-        }.getType();
-        List<Person> list = new Gson().fromJson(content, listType);
+        List<Person> list = convertToPersonList(content);
         assertNotNull(list);
 
         list.forEach(person -> LOG.info("person: {}", person));
+    }
+
+    private List<Person> convertToPersonList(String content) {
+        Type listType = new TypeToken<ArrayList<Person>>() {
+        }.getType();
+        return new Gson().fromJson(content, listType);
     }
 }
