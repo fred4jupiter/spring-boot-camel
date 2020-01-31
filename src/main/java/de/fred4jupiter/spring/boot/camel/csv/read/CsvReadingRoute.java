@@ -18,7 +18,7 @@ public class CsvReadingRoute extends SpringRouteBuilder {
         BindyCsvDataFormat csvDataFormat = new BindyCsvDataFormat(Person.class);
 
         from("file:{{inbox.csv.folder}}?moveFailed=error/${file:name.noext}-${date:now:yyyyMMddHHmmssSSS}.${file:ext}")
-                .id("CsvReadingRoute")
+                .routeId("de.fred4jupiter.spring.boot.camel.CsvReadingRoute")
                 .unmarshal(csvDataFormat)
                 .marshal().json(JsonLibrary.Gson, true)
                 .log(LoggingLevel.DEBUG, "processed CSV file: ${header.CamelFileName}, ID: ${id}")
